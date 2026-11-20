@@ -11,8 +11,6 @@ let package = Package(
         // People API: contacts and contact groups
         .library(name: "GoogleContacts", targets: ["GoogleContacts"]),
         .executable(name: "google", targets: ["GoogleCLI"]),
-        .executable(name: "t_google", targets: ["GoogleTests"]),
-        .executable(name: "t_google_live", targets: ["GoogleLive"]),
     ],
     dependencies: [
         .package(url: "https://github.com/leviouwendijk/Primitives.git", branch: "master"),
@@ -21,7 +19,6 @@ let package = Package(
         .package(url: "https://github.com/leviouwendijk/Milieu.git", branch: "master"),
         .package(url: "https://github.com/leviouwendijk/Readers.git", branch: "master"),
         .package(url: "https://github.com/leviouwendijk/Arguments.git", branch: "master"),
-        .package(url: "https://github.com/leviouwendijk/Testing.git", branch: "master"),
     ],
     targets: [
         .target(
@@ -51,25 +48,6 @@ let package = Package(
                 .product(name: "Readers", package: "Readers"),
             ],
             path: "Sources/GoogleCLI"
-        ),
-        .executableTarget(
-            name: "GoogleTests",
-            dependencies: [
-                "Google",
-                "GoogleContacts",
-                .product(name: "Testing", package: "Testing"),
-            ],
-            path: "Testing/GoogleTests"
-        ),
-        .executableTarget(
-            name: "GoogleLive",
-            dependencies: [
-                "Google",
-                "GoogleContacts",
-                .product(name: "Milieu", package: "Milieu"),
-                .product(name: "Testing", package: "Testing"),
-            ],
-            path: "Testing/GoogleLive"
         ),
     ],
     swiftLanguageModes: [.v6]
