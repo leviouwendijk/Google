@@ -2,10 +2,6 @@
 /.swiftpm/
 .DS_Store
 
-# auto-added ignorables:
-compiled.pkl
-/compiled.pkl
-**/compiled.pkl
 
 # session tooling
 .claude/
