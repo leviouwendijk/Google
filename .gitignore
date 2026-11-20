@@ -1,0 +1,26 @@
+/.build/
+/.swiftpm/
+.DS_Store
+
+# auto-added ignorables:
+compiled.pkl
+/compiled.pkl
+**/compiled.pkl
+
+# session tooling
+.claude/
+
+# gm defaults
+.build/
+.index-build/
+.swiftpm/
+DerivedData/
+*.xcodeproj/project.xcworkspace/xcuserdata/
+*.xcodeproj/xcuserdata/
+*.xcworkspace/xcuserdata/
+xcuserdata/
+.env
+.env.*
+.env/*
+**/.testflows/*
+!**/.testflows/snapshots/

@@ -1,0 +1,20 @@
+uuid = "21DCC7F7-2BF6-41BD-A296-EA7CCDCF3BC4"
+name = "Google"
+types { "library" }
+versions {
+    release {
+        major = 0
+        minor = 1
+        patch = 0
+    }
+}
+compile {
+    use = true
+    arguments { "--products" "google" }
+}
+tests {
+    primary = "t_google"
+}
+details = "Google APIs: Desktop OAuth with a stored refresh token, token cache, authorized transport, and Contacts (People API), with the google CLI."
+author = "levi"
+update = "https://raw.githubusercontent.com/leviouwendijk/Google/master/build-object.pkl"
