@@ -126,7 +126,7 @@ public extension Google {
 
         /// Maps Google's error envelope (`error.code`, `error.status`,
         /// `error.details[].reason`) to a failure.
-        package static func failure(from data: Data, status: Int, retryAfter: Int?) -> Failure {
+        @_spi(Testing) public static func failure(from data: Data, status: Int, retryAfter: Int?) -> Failure {
             let error = (try? JSONDecoder().decode(Envelope.self, from: data))?.error
             let reason = error?.details?.lazy.compactMap(\.reason).first
             let message = error?.message.map { String($0.prefix(300)) }

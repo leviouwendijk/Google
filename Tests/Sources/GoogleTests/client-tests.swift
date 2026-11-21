@@ -1,5 +1,5 @@
 import Foundation
-import Google
+@_spi(Testing) import Google
 import Testing
 
 enum ClientTests {
