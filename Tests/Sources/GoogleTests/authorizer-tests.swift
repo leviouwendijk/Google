@@ -10,8 +10,8 @@ enum AuthorizerTests {
         }
         let authorizer = try Google.Authorizer(
             user: Fixtures.user(),
-            oauth: Google.OAuth(transport: server.transport, now: { clock.now }),
-            now: { clock.now }
+            oauth: Google.OAuth(transport: server.transport, clock: clock.clock),
+            clock: clock.clock
         )
 
         let tokens = try await withThrowingTaskGroup(of: String.self) { group in

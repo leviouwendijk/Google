@@ -11,6 +11,7 @@ let package = Package(
     ],
     dependencies: [
         .package(url: "https://github.com/leviouwendijk/Milieu.git", branch: "master"),
+        .package(url: "https://github.com/leviouwendijk/Primitives.git", branch: "master"),
         .package(url: "https://github.com/leviouwendijk/Testing.git", branch: "master"),
         .package(path: ".."),
     ],
@@ -20,6 +21,7 @@ let package = Package(
             dependencies: [
                 .product(name: "Google", package: "Google"),
                 .product(name: "GoogleContacts", package: "Google"),
+                .product(name: "Primitives", package: "Primitives"),
                 .product(name: "Testing", package: "Testing"),
             ]
         ),

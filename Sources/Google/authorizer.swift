@@ -1,4 +1,5 @@
 import Foundation
+import Primitives
 
 public extension Google {
     /// Access tokens for one authorized user, refreshed on demand.
@@ -12,7 +13,7 @@ public extension Google {
 
         private var user: AuthorizedUser
         private let oauth: OAuth
-        private let now: @Sendable () -> Date
+        private let clock: WallClock
         private let onRotation: (@Sendable (AuthorizedUser) async -> Void)?
 
         private var current: AccessToken?
@@ -21,12 +22,12 @@ public extension Google {
         public init(
             user: AuthorizedUser,
             oauth: OAuth = .init(),
-            now: @escaping @Sendable () -> Date = Date.init,
+            clock: WallClock = .system,
             onRotation: (@Sendable (AuthorizedUser) async -> Void)? = nil
         ) {
             self.user = user
             self.oauth = oauth
-            self.now = now
+            self.clock = clock
             self.onRotation = onRotation
         }
 
@@ -55,7 +56,7 @@ public extension Google {
         }
 
         private func validToken() async throws -> AccessToken {
-            if let current, current.expiresAt.timeIntervalSince(now()) > Self.expirySkew {
+            if let current, current.expiresAt.timeIntervalSince(Date(clock.now)) > Self.expirySkew {
                 return current
             }
             if let refreshing {

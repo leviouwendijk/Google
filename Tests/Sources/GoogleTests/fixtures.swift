@@ -1,5 +1,6 @@
 import Foundation
 import Google
+import Primitives
 
 /// A fake Google: answers each request from a handler and records it.
 actor FixtureServer {
@@ -61,13 +62,17 @@ enum Fixtures {
     }
 }
 
-/// A clock tests can move.
+/// Time tests can move, read through `clock`.
 final class FixtureClock: @unchecked Sendable {
     private let lock = NSLock()
     private var current = Date(timeIntervalSince1970: 1_800_000_000)
 
     var now: Date {
         lock.withLock { current }
+    }
+
+    var clock: WallClock {
+        WallClock { WallClock.Instant(self.now) }
     }
 
     func advance(_ seconds: TimeInterval) {

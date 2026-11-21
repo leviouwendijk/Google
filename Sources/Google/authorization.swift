@@ -148,11 +148,11 @@ public extension Google {
         public static let revokeURL = URL(string: "https://oauth2.googleapis.com/revoke")!
 
         private let transport: Transport
-        private let now: @Sendable () -> Date
+        private let clock: WallClock
 
-        public init(transport: Transport = .live, now: @escaping @Sendable () -> Date = Date.init) {
+        public init(transport: Transport = .live, clock: WallClock = .system) {
             self.transport = transport
-            self.now = now
+            self.clock = clock
         }
 
         /// Exchanges the redirect's code. Fails with `authorizationRequired
@@ -170,7 +170,7 @@ public extension Google {
             guard let refresh = response.refresh_token, let refreshToken = try? Secret(refresh) else {
                 throw Failure.authorizationRequired(.no_refresh_token)
             }
-            let accessToken = try response.accessToken(issued: now(), fallbackScopes: request.scopes)
+            let accessToken = try response.accessToken(issued: Date(clock.now), fallbackScopes: request.scopes)
             let user = AuthorizedUser(
                 client: request.client,
                 refreshToken: refreshToken,
@@ -189,7 +189,7 @@ public extension Google {
                 ("client_id", user.client.clientID),
                 ("client_secret", user.client.clientSecret.raw),
             ])
-            let accessToken = try response.accessToken(issued: now(), fallbackScopes: user.scopes)
+            let accessToken = try response.accessToken(issued: Date(clock.now), fallbackScopes: user.scopes)
             var rotated: AuthorizedUser?
             if let replacement = response.refresh_token.flatMap({ try? Secret($0) }),
                replacement != user.refreshToken
