@@ -13,12 +13,12 @@ let package = Package(
         .executable(name: "google", targets: ["GoogleCLI"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/leviouwendijk/Primitives.git", branch: "master"),
-        .package(url: "https://github.com/leviouwendijk/Sensitivity.git", branch: "master"),
+        .package(url: "https://github.com/swift-lco/Primitives.git", branch: "master"),
+        .package(url: "https://github.com/swift-lco/Sensitivity.git", branch: "master"),
         .package(url: "https://github.com/swift-webc/HTTP.git", branch: "master"),
-        .package(url: "https://github.com/leviouwendijk/Milieu.git", branch: "master"),
-        .package(url: "https://github.com/leviouwendijk/Readers.git", branch: "master"),
-        .package(url: "https://github.com/leviouwendijk/Arguments.git", branch: "master"),
+        .package(url: "https://github.com/swift-lco/Milieu.git", branch: "master"),
+        .package(url: "https://github.com/swift-lco/Readers.git", branch: "master"),
+        .package(url: "https://github.com/swift-lco/Arguments.git", branch: "master"),
     ],
     targets: [
         .target(
